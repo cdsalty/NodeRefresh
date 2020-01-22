@@ -5,15 +5,15 @@ const url =
 const spainishUrl =
   'https://api.darksky.net/forecast/5e8a54e1354605908f9c1d425506dea9/37.8267,-122.4233?lang=es';
 
+// by setting json to true, which will have 'request' parse the information as json
+// I dont need to parse
 /*
-Exercise A: 
-  - Print small forcast to user
+Goal: Print small forcast to user
   - Print: "it is currently  58.5 degrees out; There is 0% chance of rain"
   */
 request({url: url, json: true}, (error, response) => {
-  // by setting json to true, request will take care of parsing the json
   // console.log(response); // logs all the data we want to parse and access. in the body is the DATA
-  //
+  // const data = JSON.parse(response.body);
   // console.log(data.currently); // currrently is 'current forecast inforamtion'
   // console.log(response.body.currently); // all because of setting json to true
   let temp = response.body.currently.temperature;
@@ -24,19 +24,24 @@ request({url: url, json: true}, (error, response) => {
   );
 });
 
-/* 
-Part II: HTTP Request Challenge
-//    - Geocoding and Using an API (address->lat/long->weater)
-    //- use reverse geocoding: provide an address and get lat/long back
-
-Exercise: B
-Goal: print the lat/long for los angeles
-- use the link with mapbox inside the console: https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg
-- have the request module parse it to json
-- print both the lat and long
-- test code
+/*
+the json responded back as below with currently through flags as different objects, seperators
+{
+latitude: 37.8267,
+longitude: -122.4233,
+timezone: "America/Los_Angeles",
+currently: {},
+minutely: {},
+hourly: {},
+daily: {},
+alerts: [],
+flags: {},
+offset: -8
+}
 */
-const urlB = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg&limit=1`;
-request({urlB: urlB}, (error, response) => {
-  console.log(response.features[0]);
-});
+
+// request(url: url, function (error, response, body) {
+//   console.log('error:', error); // Print the error if one occurred
+//   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//   console.log('body:', body); // Print the HTML for the Google homepage.
+// });
