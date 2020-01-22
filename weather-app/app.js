@@ -13,7 +13,6 @@ Exercise A:
 request({url: url, json: true}, (error, response) => {
   // by setting json to true, request will take care of parsing the json
   // console.log(response); // logs all the data we want to parse and access. in the body is the DATA
-  //
   // console.log(data.currently); // currrently is 'current forecast inforamtion'
   // console.log(response.body.currently); // all because of setting json to true
   let temp = response.body.currently.temperature;
@@ -32,11 +31,16 @@ Part II: HTTP Request Challenge
 Exercise: B
 Goal: print the lat/long for los angeles
 - use the link with mapbox inside the console: https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg
-- have the request module parse it to json
-- print both the lat and long
+- have the request module parse it as json
+- print both the lat and long to terminal
 - test code
 */
-const urlB = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg&limit=1`;
-request({urlB: urlB}, (error, response) => {
-  console.log(response.features[0]);
+
+const geoCodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg`;
+request({url: geoCodeUrl, json: true}, (error, response) => {
+  const latitude = response.body.features[0].center[1]; // center is an array of lat and long, 0=long
+  const longitude = response.body.features[0].center[0];
+  console.log(
+    `The latitude is approx ${latitude} and the longitude is appprox ${longitude}`
+  );
 });

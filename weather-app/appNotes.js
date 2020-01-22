@@ -45,3 +45,29 @@ offset: -8
 //   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 //   console.log('body:', body); // Print the HTML for the Google homepage.
 // });
+
+/* 
+Part II: HTTP Request Challenge
+//    - Geocoding and Using an API (address->lat/long->weater)
+    //- use reverse geocoding: provide an address and get lat/long back
+
+Exercise: B
+Goal: print the lat/long for los angeles
+- use the link with mapbox inside the console: https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg
+- have the request module parse it as json
+- print both the lat and long to terminal
+- test code
+*/
+// a) define the url and assign it to a variable
+const geoCodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiY2Rzb2x0aXMiLCJhIjoiY2s1b3Nwb2N6MGFnajNscGNlMG9yajFjNiJ9.Tx0JlVZRjDuAsvb7xSfiMg`;
+// b) fire off request to the options object, the url and set json to true
+request({url: geoCodeUrl, json: true}, (error, response) => {
+  // console.log(response.body); // start with looking inside response.body
+  // c) print lat and long
+  const latitude = response.body.features[0].center[1]; // center is an array of lat and long, 0=lat
+  // console.log(latitude);
+  const longitude = response.body.features[0].center[0];
+  console.log(
+    `The latitude is approx ${latitude} and the longitude is appprox ${longitude}`
+  );
+});
