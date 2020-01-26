@@ -25,7 +25,7 @@ geoCode('Atlanta', (error, data) => {
 // Need to make sure user can provide location without modifing the source code...
 /*
 Goal: Accept location via command line interface
-- access the command line argument with using yargs
+- access the command line argument without using yargs
 - use the string value as the input for geocode
 - only geocode if the user provides a location
 - test with 2 locations...
