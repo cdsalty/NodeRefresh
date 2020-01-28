@@ -6,10 +6,31 @@ const app = express();
 const publicDirectory = path.join(__dirname, '../public');
 // to have it calling the src destination + the public url info
 
+app.set('view engine', 'hbs'); // in short, telling express we're using a templating engine.
+
 app.use(express.static(publicDirectory)); // static is an express method that calls on use the method for url routing
 
 app.get('', (req, res) => {
-  res.send('hello express');
+  // res.render is used to display and view the 'views/handlebars' file.
+  res.render('index', {
+    title: 'Weather Application', // we can go back and use this information within Handlebars
+    name: 'Christopher Soltis'
+  });
+});
+
+app.get('/about', (req, res) => {
+  // small mistake not to make that cost me time './about' vs '/about'
+  res.render('about', {
+    from: 'Georgia',
+    pupsName: 'Daisy'
+  });
+});
+
+app.get('/help', (req, res) => {
+  res.render('help', {
+    phoneContactName: 'Ellie',
+    phone: '876-501-3905'
+  });
 });
 
 app.get('/weather', (req, res) => {
