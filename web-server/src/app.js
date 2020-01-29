@@ -3,11 +3,15 @@ const express = require('express');
 
 const app = express();
 
-const publicDirectory = path.join(__dirname, '../public');
-// to have it calling the src destination + the public url info
+// Define paths for Express config
+const publicDirectory = path.join(__dirname, '../public'); // calling the src destination + the public url info
+const viewsPath = path.join(__dirname, '../templates');
 
+// Setup handlebars engine and views location
 app.set('view engine', 'hbs'); // in short, telling express we're using a templating engine.
+app.set('views', viewsPath); // replacing default folder name of views with the viewsPath directory
 
+// Setup Static Directory to serve
 app.use(express.static(publicDirectory)); // static is an express method that calls on use the method for url routing
 
 app.get('', (req, res) => {
