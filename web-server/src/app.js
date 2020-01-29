@@ -61,16 +61,23 @@ app.get('/weather', (req, res) => {
 // extensions to previous routes: this/help/example vs routes that don't exist this/other/givesError
 // help/example
 app.get('/help/*', (req, res) => {
-  res.send('Help article');
+  res.render('404', {
+    title: '404 Error',
+    name: 'Christopher',
+    errorMessage: 'Help article NOT found'
+  });
 });
 
 // 404 Route Error
-app.get('', (req, res) => {
-  res.send("You've reached a 404 error");
+app.get('*', (req, res) => {
+  // res.send("You've reached a 404 error");
+  res.render('404', {
+    title: 404,
+    name: 'Christopher',
+    errorMessage: 'Page NOT found'
+  });
 });
 
 app.listen(3000, () => {
   console.log('listening on port 3000');
 });
-
-// nodemon src/app.js
