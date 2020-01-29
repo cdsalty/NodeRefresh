@@ -5,7 +5,8 @@ const app = express();
 
 // Define paths for Express config
 const publicDirectory = path.join(__dirname, '../public'); // calling the src destination + the public url info
-const viewsPath = path.join(__dirname, '../templates');
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPaTH = path.join(__dirname, '../templates/partials');
 
 // Setup handlebars engine and views location
 app.set('view engine', 'hbs'); // in short, telling express we're using a templating engine.
