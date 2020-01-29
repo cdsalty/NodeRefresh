@@ -4,10 +4,13 @@ const hbs = require('hbs');
 const app = express();
 
 /*
-Challenge: Create a partial for the footer
-  1. Setup the template for the footer partial with a paragraph: "Created by .... "
-  2. Render the partial at the bottom of all three pages
-  3. Test by visiting all pages
+Challenge: Create and Render a 404 page with handlebars
+- setup the templete to render the header and the footer
+- setup the templete to render an error message in a paragraph
+- render the templete for both 404 routes
+      ---> Page Not Found
+      ---> Help Article Not Found
+- test work by visiting /what and /help/units
 */
 
 // Define paths for Express config
@@ -53,6 +56,17 @@ app.get('/weather', (req, res) => {
     weather: 'cloudy',
     location: 'Atlanta, GA'
   });
+});
+
+// extensions to previous routes: this/help/example vs routes that don't exist this/other/givesError
+// help/example
+app.get('/help/*', (req, res) => {
+  res.send('Help article');
+});
+
+// 404 Route Error
+app.get('', (req, res) => {
+  res.send("You've reached a 404 error");
 });
 
 app.listen(3000, () => {
