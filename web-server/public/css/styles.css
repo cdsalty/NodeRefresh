@@ -1,7 +1,31 @@
-h1 {
-  color: blue;
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* color: #333333; */
+  color: red;
+  max-width: 650px; /* desired width */
+  margin: 0 auto; /* Zero margin on top/bottom and automatically align left and right */
+  padding: 0 16px;
 }
-img {
-  width: 250px;
-  height: auto;
+header {
+  margin-top: 16px;
+  margin-bottom: 48px;
+}
+
+footer {
+  background: blue;
+  color: #888888;
+  border-top: 1px solid #eeeeee;
+  margin-top: 16px;
+  padding: 16px 0;
+}
+
+h1 {
+  font-size: 60px;
+  margin-bottom: 16px;
+}
+
+header a {
+  color: #888888;
+  margin-right: 16px;
+  text-decoration: none;
 }

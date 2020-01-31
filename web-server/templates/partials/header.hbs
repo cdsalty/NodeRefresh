@@ -1,11 +1,18 @@
 {{!-- doesn't use standard html markup --}}
 {{!-- since title is referred to in all, help.hbs, about.hbs and index.hbs, it can be used in the header --}}
-<h2>{{title}}</h2>
+
 {{!-- <h1>Static Header.hbs Text</h1> --}}
 
 {{!-- To put a navbar on each page: --}}
-<div>
+{{!-- <div>
   <a href="/">Weather</a>
   <a href="/about">About</a>
   <a href="/help">Help</a>
-</div>
+</div> --}}
+
+<header>
+  <h2>{{title}}</h2>
+  <a href="/">Weather</a>
+  <a href="/about">About</a>
+  <a href="/help">Help</a>
+</header>
