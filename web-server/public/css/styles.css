@@ -5,6 +5,10 @@ body {
   max-width: 650px; /* desired width */
   margin: 0 auto; /* Zero margin on top/bottom and automatically align left and right */
   padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 footer {
@@ -30,6 +34,10 @@ header a {
   text-decoration: none;
 }
 
-img {
+.potrait {
   width: 250px;
+}
+
+.main-content {
+  flex-grow: 1;
 }
