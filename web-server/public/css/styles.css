@@ -6,17 +6,17 @@ body {
   margin: 0 auto; /* Zero margin on top/bottom and automatically align left and right */
   padding: 0 16px;
 }
-header {
-  margin-top: 16px;
-  margin-bottom: 48px;
-}
 
 footer {
-  background: blue;
+  /* background: blue; */
   color: #888888;
   border-top: 1px solid #eeeeee;
   margin-top: 16px;
   padding: 16px 0;
+}
+header {
+  margin-top: 16px;
+  margin-bottom: 48px;
 }
 
 h1 {
@@ -28,4 +28,8 @@ header a {
   color: #888888;
   margin-right: 16px;
   text-decoration: none;
+}
+
+img {
+  width: 250px;
 }
