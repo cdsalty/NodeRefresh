@@ -3,16 +3,6 @@ const express = require('express');
 const hbs = require('hbs');
 const app = express();
 
-/*
-Challenge: Create and Render a 404 page with handlebars
-- setup the templete to render the header and the footer
-- setup the templete to render an error message in a paragraph
-- render the templete for both 404 routes
-      ---> Page Not Found
-      ---> Help Article Not Found
-- test work by visiting /what and /help/units
-*/
-
 // Define paths for Express config
 const publicDirectory = path.join(__dirname, '../public'); // calling the src destination + the public url info
 const viewsPath = path.join(__dirname, '../templates/views');
@@ -35,7 +25,7 @@ app.get('', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  // small mistake not to make that cost me time './about' vs '/about'
+  // small mistake not to make that cost me time './about' vs '/about'      ******!!******
   res.render('about', {
     title: 'About',
     name: 'Christopher',
@@ -51,10 +41,43 @@ app.get('/help', (req, res) => {
   });
 });
 
+/*
+Challenge: Update weather route endpoint to accept address
+1. If no address is provided, send back an error message
+2. If user provides address, send back static JSON
+  - Add an address property into JSON which returns the provided address
+3. Test:
+  - /weather
+  - /weather?address=atlanta
+*/
+
 app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: 'No address provided. Please enter location to search'
+    });
+  }
   res.send({
-    weather: 'cloudy',
-    location: 'Atlanta, GA'
+    forecast: 'cloudy',
+    location: 'Atlanta',
+    address: req.query.address
+  });
+});
+
+// practice to work with query strings (Creating a route to get our JSON data)
+app.get('/products', (req, res) => {
+  // console.log(req.query); // retuns {serach: "games"}
+  // console.log(req.query.search); // returns games
+  // Only do a search is there is criteria to search; if no criteria "!"
+  if (!req.query.search) {
+    // if no search criteria/item is provided... send back a JSON error messaage
+    return res.send({
+      error: 'No search term was provided'
+    });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: []
   });
 });
 
@@ -68,7 +91,7 @@ app.get('/help/*', (req, res) => {
   });
 });
 
-// 404 Route Error
+// 404 Route Error  -- always have this route listed last
 app.get('*', (req, res) => {
   // res.send("You've reached a 404 error");
   res.render('404', {

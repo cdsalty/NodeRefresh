@@ -16,6 +16,24 @@ app.use(express.static(publicDirectory)); // static is an express method that ca
 app.get('', (req, res) => {
   res.send('hello express'); // on screen
 });
+
+// practice working with query strings (Creating a route to get our JSON data)
+app.get('/products', (req, res) => {
+  // console.log(req.query); // retuns {serach: "games"}
+  // console.log(req.query.search); // returns games
+  // Only do a search is there is criteria to search; if no criteria "!"
+  if (!req.query.search) {
+    // if no search criteria/item is provided... send back a JSON error messaage
+    return res.send({
+      error: 'No search term was provided'
+    });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: []
+  });
+});
+
 // Over Written
 app.get('/help', (req, res) => {
   res.send('Help Page');
