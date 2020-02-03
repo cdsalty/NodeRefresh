@@ -57,8 +57,41 @@ app.listen(3000, () => {
 // nodemon src/app.js
 
 /*
-Create HTML page for the "about" route that displays "ABOUT"  ->
-Create an HTML page for the "help" route that displays "HELP" ->
-- Remove the old route handlers for about and help
-  - visit both routes and test.
+Challenge: Update weather route endpoint to accept address
+1. If no address is provided, send back an error message
+2. If user provides address, send back static JSON
+  - Add an address property into JSON which returns the provided address
+3. Test:
+  - /weather
+  - /weather?address=atlanta
 */
+
+app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: 'No address provided. Please enter location to search'
+    });
+  }
+  res.send({
+    forecast: 'cloudy',
+    location: 'Atlanta',
+    address: req.query.address
+  });
+});
+
+// practice to work with query strings (Creating a route to get our JSON data)
+app.get('/products', (req, res) => {
+  // console.log(req.query); // retuns {serach: "games"}
+  // console.log(req.query.search); // returns games
+  // Only do a search is there is criteria to search; if no criteria "!"
+  if (!req.query.search) {
+    // if no search criteria/item is provided... send back a JSON error messaage
+    return res.send({
+      error: 'No search term was provided'
+    });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: []
+  });
+});

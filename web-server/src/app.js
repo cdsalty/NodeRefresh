@@ -1,6 +1,9 @@
 const path = require('path'); // used to concate the directory path along with the path I intend to go too
 const express = require('express');
 const hbs = require('hbs');
+const geocode = require('./utilities/geocode');
+const forecast = require('./utilities/forecast');
+// const request = require('request');
 const app = express();
 
 // Define paths for Express config
@@ -41,26 +44,29 @@ app.get('/help', (req, res) => {
   });
 });
 
-/*
-Challenge: Update weather route endpoint to accept address
-1. If no address is provided, send back an error message
-2. If user provides address, send back static JSON
-  - Add an address property into JSON which returns the provided address
-3. Test:
-  - /weather
-  - /weather?address=atlanta
-*/
-
 app.get('/weather', (req, res) => {
   if (!req.query.address) {
     return res.send({
-      error: 'No address provided. Please enter location to search'
+      error: 'You must provide an address!'
     });
   }
-  res.send({
-    forecast: 'cloudy',
-    location: 'Atlanta',
-    address: req.query.address
+
+  geocode(req.query.address, (error, {latitude, longitude, location}) => {
+    if (error) {
+      return res.send({error});
+    }
+
+    forecast(latitude, longitude, (error, forecastData) => {
+      if (error) {
+        return res.send({error});
+      }
+
+      res.send({
+        forecast: forecastData,
+        location,
+        address: req.query.address
+      });
+    });
   });
 });
 
