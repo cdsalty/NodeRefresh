@@ -17,3 +17,11 @@ fetch('http://localhost:3000/weather?address=atlanta').then((response) => {
     }
   });
 });
+
+// Linking the form data that get's entered.
+
+const weatherForm = document.querySelector('form');
+weatherForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  console.log('testing');
+});
