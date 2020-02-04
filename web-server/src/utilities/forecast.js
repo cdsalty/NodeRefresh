@@ -28,7 +28,7 @@ const forecast = (latitude, longitude, callback) => {
       callback(
         undefined,
         // `The overall summary for today is ${summary}. Currently, it's ${temp} degrees outside. Their is a ${rainChance}% of rain.`
-        `${summary}. Currently, it's ${temp} degrees outside. Their is a ${rainChance}% of rain.`
+        `${summary}. Currently, it's ${temp} degrees outside. There is a ${rainChance}% of rain.`
       );
     }
   });
