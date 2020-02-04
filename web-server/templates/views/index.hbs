@@ -8,14 +8,17 @@
 </head>
 
 <body>
+
+  {{>header}}
   <div>
-    {{>header}}
     <p>Your new weather site</p>
     <form>
       {{!-- will target input for user's value --}}
       <input placeholder="Enter Location">
       <button>Search</button>
     </form>
+    <p id="message-one"></p>
+    <p id="message-two"></p>
   </div>
 
   {{>footer}}

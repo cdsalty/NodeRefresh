@@ -1,27 +1,37 @@
-/*
-Challenge: Use the input value to get the weather
-1. Migrate fetch call into the submit callback
-2. Use the search text as the address query string value
-3. Submit the form with a valid and invalid to test
-*/
-
-// Linking the form data that get's entered.
 const weatherForm = document.querySelector('form');
 const search = document.querySelector('input');
 
+const messageOne = document.querySelector('#message-one');
+const messageTwo = document.querySelector('#message-two');
+
+/*
+Challenge: Render Content to the paragraphs
+1. Select the first and second message from within the html (messsageOne, messageTwo);
+2. Just before fetch, render loading message and empty p
+3. If error, render error
+4. If no error, render location and forecast
+5. Test work!
+*/
+
 weatherForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  // console.log(search) will only return the input element but by adding value, we get the input
-  // console.log(search.value);
+
   const location = search.value; // take this information and fetch it below
+
+  messageOne.textContent = 'Loading...';
+  messageTwo.textContent = ''; // because of this, when user searches again, this will reset
+
   fetch(`http://localhost:3000/weather?address=${location}`).then((response) => {
     response.json().then((data) => {
       // console.log(data);
       if (data.error) {
-        console.log(data.error);
+        // console.log(data.error);
+        messageOne.textContent = data.error; // will not be rendered until the fetch is called by the event listener.
       } else {
-        console.log(data.location);
-        console.log(data.forecast);
+        messageOne.textContent = data.location;
+        messageTwo.textContent = data.forecast;
+        // console.log(data.location);
+        // console.log(data.forecast);
       }
     });
   });
